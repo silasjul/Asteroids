@@ -1,9 +1,10 @@
-import com.asteroids.common.services.IStartService;
+import com.asteroids.common.services.IGameObject;
+import com.asteroids.common.services.IPluginService;
 
 module Core {
     requires Common;
     requires javafx.graphics;
-    uses IStartService;
-    uses com.asteroids.common.services.IRenderService;
+    uses IPluginService;
+    uses IGameObject;
     exports com.asteroids.core;
 }

@@ -25,10 +25,10 @@ public class Sprite {
     private int current = 0;
     private int animationCount = 0;
 
-    public Sprite(String imagePath, int width, int height, double rotationRad) {
+    public Sprite(String imagePath, int width, int height, double scale, double rotationRad) {
         this.width = width;
         this.height = height;
-        this.scale = 2;
+        this.scale = scale;
         this.rotationRad = rotationRad;
 
         try {
@@ -40,8 +40,8 @@ public class Sprite {
         this.amount = spriteSheet.getWidth() / width;
     }
 
-    public Sprite(String imagePath, int width, int height) {
-        this(imagePath, width, height, 0);
+    public Sprite(String imagePath, int width, int height, double scale) {
+        this(imagePath, width, height, scale, 0);
         createSubImages();
     }
 

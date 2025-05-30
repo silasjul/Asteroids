@@ -2,13 +2,11 @@ package com.asteroids.core;
 
 import com.asteroids.common.data.GameData;
 import com.asteroids.common.data.World;
-import com.asteroids.common.services.IStartService;
-import com.asteroids.common.services.IRenderService;
+import com.asteroids.common.services.IGameObject;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 
-import java.util.List;
 import static com.asteroids.core.ServiceLoaders.startServiceList;
 
 public class Game {
@@ -17,13 +15,10 @@ public class Game {
     private final GameData gameData = new GameData(false);
     private final World world;
 
-    private final List<IStartService> startServices;
-
     Game(Scene scene, GraphicsContext gc, int width, int height) {
         this.scene = scene;
         this.gc = gc;
         this.world = new World(width, height);
-        startServices = startServiceList();
     }
 
     public void onStart() {
@@ -45,15 +40,13 @@ public class Game {
         scene.setOnMouseReleased(_ -> gameData.setMousePressed(false));
 
         // Start IStartService implementations
-        startServices.forEach(startService -> startService.start(world));
+        startServiceList().forEach(startService -> startService.start(world));
     }
 
     public void render() {
-        for (IStartService startService : startServices) {
-            if (startService instanceof IRenderService renderService) {
-                renderService.update(world);
-                renderService.draw(gameData, gc, world);
-            }
+        for (IGameObject gameObject : world.getGameObjects()) {
+            gameObject.update(gameData, world);
+            gameObject.draw(gameData, gc, world);
         }
         gameData.increaseFrame();
     }

@@ -1,9 +1,7 @@
-import com.asteroids.common.services.IRenderService;
-import com.asteroids.common.services.IStartService;
+import com.asteroids.common.services.IPluginService;
 
 module Background {
     requires Common;
     requires javafx.graphics;
-    provides IStartService with com.asteroids.background.Background;
-    provides IRenderService with com.asteroids.background.Background;
+    provides IPluginService with com.asteroids.background.BackgroundPlugin;
 }

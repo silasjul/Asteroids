@@ -7,11 +7,11 @@
         <version>1.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.asteroids.player</groupId>
-    <artifactId>Player</artifactId>
+    <groupId>com.asteroids.bullet</groupId>
+    <artifactId>Bullet</artifactId>
     <packaging>jar</packaging>
 
-    <name>Player</name>
+    <name>Bullet</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -26,16 +26,26 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.asteroids.common</groupId>
             <artifactId>Common</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.asteroids.bullet</groupId>
-            <artifactId>Bullet</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>14</source>
+                    <target>14</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

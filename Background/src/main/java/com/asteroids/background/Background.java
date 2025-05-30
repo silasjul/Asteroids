@@ -2,19 +2,34 @@ package com.asteroids.background;
 
 import com.asteroids.common.data.GameData;
 import com.asteroids.common.data.World;
-import com.asteroids.common.services.IRenderService;
-import com.asteroids.common.services.IStartService;
+import com.asteroids.common.services.IGameObject;
 import com.asteroids.common.sprites.Parallax;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Background implements IRenderService, IStartService {
+public class Background implements IGameObject {
     private int planetScale = 5;
-    private final Parallax planet = new Parallax("/background/planet.png", 96, 96, 1);
+    private final Parallax planet = new Parallax("/background/planet.png", 96, 96, 1, 1);
     private Parallax[] bg;
+    private final int z = -10;
+
+    public Background(int width, int height) {
+        int w = width/2;
+        int h = height/2;
+        double scale = 2;
+
+        bg = new Parallax[] {
+                new Parallax("/background/void.png", w, h, scale, 0.2),
+                new Parallax("/background/stars.png", w, h, scale, 0.35),
+                new Parallax("/background/bigStarts.png", w, h, scale, 0.5),
+        };
+
+        planet.setOffsetY(-planet.getHeight()*planetScale-500);
+        planet.setOffsetX(Math.random()*(w));
+    }
 
     @Override
-    public void update(World world) {
+    public void update(GameData gameData, World world) {
         for (Parallax layer : bg) {
             layer.move();
             if (layer.getOffsetY() >= world.getHeight()) layer.setOffsetY(0);
@@ -23,9 +38,9 @@ public class Background implements IRenderService, IStartService {
         // Random planet fly-by
         planet.move();
         if (planet.getOffsetY() > world.getHeight()) {
-            planet.setOffsetX(Math.random()*(world.getWidth()-planet.getWidth()*planetScale));
-            planetScale = (int) (Math.random() * 10);
-            planet.setOffsetY(-planet.getHeight()*planetScale-800);
+            planet.setOffsetX(Math.random()*(world.getWidth()-planet.getWidth()*planetScale)); // Random offset on x-axis
+            planetScale = (int) (Math.random() * 10); // Random planet size
+            planet.setOffsetY(-planet.getHeight()*planetScale-800); // Move back to top
         }
     }
 
@@ -38,7 +53,7 @@ public class Background implements IRenderService, IStartService {
             }
 
             Image img = parallax.getCurrentImage();
-            // Draw the background twice. once regular and one offset making it go infinitely
+            // Draw the background twice - one regular and one offset
             gc.drawImage(img, 0, parallax.getOffsetY(), world.getWidth(), world.getHeight());
             gc.drawImage(img, 0, parallax.getOffsetY() - world.getHeight(), world.getWidth(), world.getHeight());
         }
@@ -46,23 +61,7 @@ public class Background implements IRenderService, IStartService {
     }
 
     @Override
-    public void start(World world) {
-        System.out.println("Starting Background");
-        int w = (int) world.getWidth()/2;
-        int h = (int) world.getHeight()/2;
-
-        bg = new Parallax[] {
-                new Parallax("/background/void.png", w, h, 0.2),
-                new Parallax("/background/stars.png", w, h, 0.35),
-                new Parallax("/background/bigStarts.png", w, h, 0.5),
-        };
-
-        planet.setOffsetY(-planet.getHeight()*planetScale-500);
-        planet.setOffsetX(Math.random()*(w));
-    }
-
-    @Override
-    public void stop(World world) {
-
+    public int getZ() {
+        return z;
     }
 }

@@ -1,8 +1,9 @@
-import com.asteroids.common.services.IStartService;
+import com.asteroids.common.services.IPluginService;
 
 module Player {
+    requires Bullet;
     requires Common;
     requires javafx.graphics;
     exports com.asteroids.player;
-    provides IStartService with com.asteroids.player.Player;
+    provides IPluginService with com.asteroids.player.PlayerPlugin;
 }

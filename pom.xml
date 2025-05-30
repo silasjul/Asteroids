@@ -15,6 +15,7 @@
         <module>Common</module>
         <module>Player</module>
         <module>Background</module>
+        <module>Bullet</module>
     </modules>
     <properties>
         <java>java</java>
