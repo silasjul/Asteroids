@@ -10,50 +10,46 @@
 Game made with java and javaFX
 </pre>
 
-[![Next.js](https://img.shields.io/badge/Next-black?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/) [![Python](https://img.shields.io/badge/Python-3.13%2B-blue?style=flat&logo=python&logoColor=white)](https://www.python.org/) [![Docker](https://img.shields.io/badge/Docker-blue?style=flat&logo=docker&logoColor=white)](https://www.docker.com/) [![Postgres](https://img.shields.io/badge/PostgreSQL-4169e1?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/) [![Golang](https://img.shields.io/badge/Golang-00ADD8?style=flat&logo=go&logoColor=white)](https://go.dev/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=java&logoColor=white)](https://www.java.com/en/)
 
 </div>
 
 ## Description
 
-The core idea behind TradeSocial is to leverage social media sentiment, to gauge potential impacts on the stock market. Tweets are scraped from selected influential figures and presented alongside relevant stock data to help traders make more informed decisions.
-
-## Tech Stack
-
-This project utilizes a combination of modern web technologies:
-
--   **Frontend:** [Next.js](https://nextjs.org/) React Framework
--   **Scraping:** [Python](https://www.python.org/) using FastAPI and Selenium
--   **Database:** [Postgres](https://www.postgresql.org/) using [Golang](https://go.dev/)
--   **Containerization:** [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)
+Asteroids is a component-based arcade-style game developed using Java and JavaFX as part of a university course. The game demonstrates the application of software engineering principles, including interface contracts and component-based design. It features core components such as Player, Enemy, Asteroids, Weapon/Bullet, and Rendering/Drawing. The game challenges players to navigate a spaceship through an asteroid field, destroying asteroids and avoiding collisions.
 
 ## Features
 
--   **Stock Data Visualization:** View stock data.
--   **Influencer Tweet Feed:** Displays tweets scraped from the list of people you follow.
--   **Tweet Markers** Hover over the tweets to see where it was posted on the charts.
+-   **Component-Based Architecture:** The game is designed with a component-based architecture, promoting modularity and reusability.
+-   **Service Provided Interfaces:** The Player, Enemy, and Weapon components implement service provided interfaces, allowing for updating and removing components without recompilation.
+-   **Core Components:** Includes essential game components such as Player, Enemy, Asteroids, Weapon/Bullet, and Rendering/Drawing.
+-   **Classic Gameplay:** Experience the timeless fun of the original Asteroids arcade game.
+-   **Responsive Controls:** Smooth and precise controls for navigating your spaceship.
+-   **Dynamic Asteroid Field:** Asteroids of varying sizes and speeds create a challenging and unpredictable environment.
+-   **Score Tracking:** Keep track of your high scores and challenge yourself to improve.
+-   **JavaFX Implementation:** Built using JavaFX for a modern and cross-platform experience.
 
 ## Running the Project
 
-To run the project, you will need to have [Docker](https://www.docker.com/) installed.
+To run the Asteroids game, you need to have Java and Maven installed on your system. Follow these steps:
 
-1.  Clone the repository:
-
-    ```bash
-    git clone https://github.com/silasjul/TradeSocial.git
-    ```
-     ```bash
-    cd TradeSocial
-    ```
-
-2.  Run Docker Compose:
+1.  **Clone the Repository:**
 
     ```bash
-    docker-compose up --build
+    git clone https://github.com/silasjul/Asteroids.git
+    cd Asteroids
     ```
 
-    This command will build the Docker images and start the containers.
+2.  **Install Dependencies and Build:**
 
-3.  Access the application:
+    ```bash
+    mvn install
+    ```
 
-    Once the containers are running, you can access the application in your web browser at `http://localhost:3000`.
+3.  **Run the Game:**
+
+    ```bash
+    mvn exec:exec
+    ```
+
+**Note:** Ensure that Maven is correctly installed and configured.
