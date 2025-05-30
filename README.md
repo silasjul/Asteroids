@@ -18,7 +18,9 @@ Game made with java and javaFX
 
 Asteroids is a component-based arcade-style game developed using Java and JavaFX as part of a university course. The game challenges players to survive in an alien infested space in a spaceship through an asteroid field. The challenge for this project was using ServiceLoaders to dynamically load game components. I used a cool free asset-packs made by [Foozle](https://foozlecc.itch.io/). I had a blast making this game!
 
+<div align="center">
 ![Untitled video - Made with Clipchamp](https://github.com/user-attachments/assets/6879d906-f0f3-4989-8a0d-5fda8ae7eb85)
+</div>
 
 ## Requirements
 
