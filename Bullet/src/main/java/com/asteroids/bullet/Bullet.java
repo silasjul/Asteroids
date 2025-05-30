@@ -4,7 +4,7 @@ import com.asteroids.common.data.GameData;
 import com.asteroids.common.data.World;
 import com.asteroids.common.gameObjects.Entity;
 import com.asteroids.common.gameObjects.EntityType;
-import com.asteroids.common.services.IGameObject;
+import com.asteroids.common.gameObjects.IGameObject;
 import com.asteroids.common.sprites.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

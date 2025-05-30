@@ -2,7 +2,7 @@ package com.asteroids.background;
 
 import com.asteroids.common.data.GameData;
 import com.asteroids.common.data.World;
-import com.asteroids.common.services.IGameObject;
+import com.asteroids.common.gameObjects.IGameObject;
 import com.asteroids.common.sprites.Parallax;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

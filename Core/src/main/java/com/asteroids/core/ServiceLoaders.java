@@ -1,6 +1,6 @@
 package com.asteroids.core;
 
-import com.asteroids.common.services.IGameObject;
+import com.asteroids.common.gameObjects.IGameObject;
 import com.asteroids.common.services.IPluginService;
 
 import java.util.List;

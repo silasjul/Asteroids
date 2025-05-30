@@ -1,4 +1,4 @@
-package com.asteroids.common.services;
+package com.asteroids.common.gameObjects;
 
 import com.asteroids.common.data.GameData;
 import com.asteroids.common.data.World;

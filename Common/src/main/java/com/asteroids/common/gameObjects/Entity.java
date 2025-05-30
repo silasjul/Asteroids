@@ -40,4 +40,12 @@ public abstract class Entity {
         int size = 5;
         gc.fillOval(this.x-size/2., this.y-size/2., size, size);
     }
+
+    public double getColliderWidth() {
+        return this.collider.getWidth();
+    }
+
+    public double getColliderHeight() {
+        return this.collider.getHeight();
+    }
 }

@@ -6,6 +6,7 @@ import com.asteroids.common.data.GameData;
 import com.asteroids.common.data.World;
 import com.asteroids.common.gameObjects.Character;
 import com.asteroids.common.gameObjects.EntityType;
+import com.asteroids.common.gameObjects.IPlayer;
 import com.asteroids.common.sprites.Sprite;
 import com.asteroids.player.engine.Engine;
 import com.asteroids.player.engine.EngineManager;
@@ -15,7 +16,7 @@ import javafx.scene.image.Image;
 
 import java.util.HashMap;
 
-public class Player extends Character {
+public class Player extends Character implements IPlayer {
     private int xp = 0;
     private final EngineManager engineManager;
     private final Engine engine;

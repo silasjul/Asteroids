@@ -2,7 +2,6 @@ package com.asteroids.common.gameObjects;
 
 import com.asteroids.common.data.GameData;
 import com.asteroids.common.data.World;
-import com.asteroids.common.services.IGameObject;
 import javafx.scene.image.Image;
 
 public abstract class Character extends Entity implements IGameObject

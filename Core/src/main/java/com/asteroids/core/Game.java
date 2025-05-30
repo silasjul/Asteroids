@@ -1,8 +1,9 @@
 package com.asteroids.core;
 
 import com.asteroids.common.data.GameData;
+import com.asteroids.common.data.IEnemyFactory;
 import com.asteroids.common.data.World;
-import com.asteroids.common.services.IGameObject;
+import com.asteroids.common.gameObjects.IGameObject;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
@@ -44,10 +45,16 @@ public class Game {
     }
 
     public void render() {
+        // Update and draw all gameobjects
         for (IGameObject gameObject : world.getGameObjects()) {
             gameObject.update(gameData, world);
             gameObject.draw(gameData, gc, world);
         }
-        gameData.increaseFrame();
+
+        // Spawn new enemies
+        IEnemyFactory enemyFactory = world.getEnemyFactory();
+        if (enemyFactory != null) enemyFactory.spawn(world);
+
+        gameData.increaseFrame(); // used in animation
     }
 }
