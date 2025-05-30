@@ -16,18 +16,12 @@ Game made with java and javaFX
 
 ## Description
 
-Asteroids is a component-based arcade-style game developed using Java and JavaFX as part of a university course. The game demonstrates the application of software engineering principles, including interface contracts and component-based design. It features core components such as Player, Enemy, Asteroids, Weapon/Bullet, and Rendering/Drawing. The game challenges players to navigate a spaceship through an asteroid field, destroying asteroids and avoiding collisions.
+Asteroids is a component-based arcade-style game developed using Java and JavaFX as part of a university course. It features core components such as Player, Enemy, Asteroids, Weapon/Bullet, and Rendering/Drawing. The game challenges players to survive in an alien infested space in a spaceship through an asteroid field. The challenge for the project was that 
 
-## Features
+## Requirements
 
--   **Component-Based Architecture:** The game is designed with a component-based architecture, promoting modularity and reusability.
--   **Service Provided Interfaces:** The Player, Enemy, and Weapon components implement service provided interfaces, allowing for updating and removing components without recompilation.
--   **Core Components:** Includes essential game components such as Player, Enemy, Asteroids, Weapon/Bullet, and Rendering/Drawing.
--   **Classic Gameplay:** Experience the timeless fun of the original Asteroids arcade game.
--   **Responsive Controls:** Smooth and precise controls for navigating your spaceship.
--   **Dynamic Asteroid Field:** Asteroids of varying sizes and speeds create a challenging and unpredictable environment.
--   **Score Tracking:** Keep track of your high scores and challenge yourself to improve.
--   **JavaFX Implementation:** Built using JavaFX for a modern and cross-platform experience.
+** The game must include Player, Enemy, Asteroids, Weapon/Bullet and Rendering/Drawing (Core) components.
+** The Player, Enemy and Weapon components must implement service provided interfaces that allow the components to be updated and removed without recompilation.
 
 ## Running the Project
 
