@@ -16,7 +16,7 @@ Game made with java and javaFX
 
 ## Description
 
-Asteroids is a component-based arcade-style game developed using Java and JavaFX as part of a university course. It features core components such as Player, Enemy, Asteroids, Weapon/Bullet, and Rendering/Drawing. The game challenges players to survive in an alien infested space in a spaceship through an asteroid field. The challenge for the project was that 
+Asteroids is a component-based arcade-style game developed using Java and JavaFX as part of a university course. It features core components such as Player, Enemy, Asteroids, Weapon/Bullet, and Rendering/Drawing. The game challenges players to survive in an alien infested space in a spaceship through an asteroid field. The challenge for this project was using ServiceLoaders to dynamically load game components. I used a cool free asset-packs made by [Foozle](https://foozlecc.itch.io/). I had a blast making this game!
 
 ## Requirements
 
