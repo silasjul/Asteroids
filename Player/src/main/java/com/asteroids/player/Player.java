@@ -29,8 +29,8 @@ public class Player extends Character implements IPlayer {
         super(0,0, 48, 48, 40,40, EntityType.PLAYER, scale, 100,10, 2,5, 5);
 
         // Spawn position
-        this.x = screenHeight / 2. - this.width / 2.;
-        this.y = screenWidth / 1.8;
+        this.x = screenWidth / 2 - this.width / 2.;
+        this.y = screenHeight / 2;
 
         // Ships
         shipMap.put(PlayerCondition.PERFECT, new Sprite ("/player/pl100.png", this.width, this.height, this.scale));
@@ -83,7 +83,7 @@ public class Player extends Character implements IPlayer {
         gc.drawImage(getPlayerImg(), pos[0] , pos[1], this.width*scale, this.height*scale);
 
         // draw collision in testing
-        if (gameData.isTesting()) drawCenterCollider(gc);
+        drawCollider(gc, gameData);
     }
 
     @Override
@@ -148,5 +148,10 @@ public class Player extends Character implements IPlayer {
         double engineY = getCenterY() + offSet * Math.sin(this.angle) - height/2.*this.scale;
 
         return new double[]{engineX, engineY};
+    }
+
+    @Override
+    public boolean isAlive() {
+        return !this.isDead;
     }
 }

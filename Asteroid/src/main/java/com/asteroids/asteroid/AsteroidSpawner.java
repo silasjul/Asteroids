@@ -9,13 +9,13 @@ import com.asteroids.common.sprites.Sprite;
 public class AsteroidSpawner extends Spawner implements ISpawner {
 
     AsteroidSpawner() {
-        super(2, 1);
+        super(5, 1);
     }
 
     @Override
     public void spawn(World world) {
         // Is it time to spawn and are we bellow or equal to max allowed instances of this entity type
-        if (!(this.getLastSpawnSeconds() >= spawnRate && world.getEntities(EntityType.ASTEROID).size() <= this.maxInstances)) return;
+        if (!(this.getLastSpawnSeconds() >= spawnRate && world.getEntities(EntityType.ASTEROID).size() < this.maxInstances)) return;
 
         // Spawn position
         int[] passPoint = getPassthroughPoint(world);
@@ -59,10 +59,10 @@ public class AsteroidSpawner extends Spawner implements ISpawner {
     }
 
     private double getRandomSpeed() {
-        return 1 + Math.random() * 1;
+        return 1.5 + Math.random() * 1;
     }
 
     private double getRandomScale() {
-        return 1 + Math.random() * 3;
+        return 1 + Math.random() * 1.5;
     }
 }

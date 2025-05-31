@@ -91,10 +91,10 @@ public class World {
     }
 
     public boolean isColliding(Entity a, Entity b) {
-        return a.getX() < b.getX() + b.getColliderWidth() &&
-                a.getX() + a.getColliderWidth() > b.getX() &&
-                a.getY() < b.getY() + b.getColliderHeight() &&
-                a.getY() + a.getColliderHeight() > b.getY();
+        return a.getColliderX() < b.getColliderX() + b.getColliderWidth() &&
+                a.getColliderX() + a.getColliderWidth() > b.getColliderX() &&
+                a.getColliderY() < b.getColliderY() + b.getColliderHeight() &&
+                a.getColliderY() + a.getColliderHeight() > b.getColliderY();
     }
 
     public IPlayer getPlayer() {

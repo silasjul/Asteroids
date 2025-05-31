@@ -5,4 +5,5 @@ public interface IPlayer {
     double getCenterX();
     double getCenterY();
     void takeDmg(int dmg);
+    boolean isAlive();
 }

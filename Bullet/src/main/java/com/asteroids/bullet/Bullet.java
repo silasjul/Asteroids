@@ -32,7 +32,7 @@ public class Bullet extends Entity implements IGameObject {
 
     @Override
     public void update(GameData gameData, World world) {
-        if (isOutOfScreen(world.getWidth(), world.getHeight())) {
+        if (this.isOutOfScreen(world)) {
             world.removeGameObject(this);
             return;
         }
@@ -45,7 +45,7 @@ public class Bullet extends Entity implements IGameObject {
         gc.drawImage(img, x - img.getWidth()/2, y - img.getHeight()/2);
         if (gameData.isAnimationFrame()) sprite.next();
 
-        if (gameData.isTesting()) drawCenterCollider(gc);
+        drawCollider(gc, gameData);
     }
 
     @Override
@@ -56,10 +56,5 @@ public class Bullet extends Entity implements IGameObject {
     public void move() {
         this.x = this.x + speed * Math.cos(angleRad);
         this.y = this.y + speed * Math.sin(angleRad);
-    }
-
-    public boolean isOutOfScreen(double screenWidth, double screenHeight) {
-        int max = 50; // Max distance allowed for a bullet to be out of canvas
-        return this.x < -max || this.x > screenWidth + max || this.y < -max || this.y > screenHeight + max;
     }
 }

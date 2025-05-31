@@ -1,5 +1,7 @@
 package com.asteroids.common.gameObjects;
 
+import com.asteroids.common.data.GameData;
+import com.asteroids.common.data.World;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -32,9 +34,10 @@ public abstract class Entity {
         return type;
     }
 
-    public void drawCenterCollider(GraphicsContext gc) {
+    public void drawCollider(GraphicsContext gc, GameData gameData) {
+        if (!gameData.isTesting()) return;
         gc.setFill(Color.web("aqua", 0.5));
-        gc.fillRect(this.x-collider.getWidth()/2., this.y- collider.getHeight()/2., collider.getWidth(), collider.getHeight());
+        gc.fillRect(this.getColliderX(), this.getColliderY(), this.getColliderWidth(), this.getColliderHeight());
 
         gc.setFill(Color.RED);
         int size = 5;
@@ -47,5 +50,17 @@ public abstract class Entity {
 
     public double getColliderHeight() {
         return this.collider.getHeight();
+    }
+
+    public double getColliderX() {
+        return this.x-this.collider.getWidth()/2.;
+    }
+    public double getColliderY() {
+        return this.y-this.collider.getHeight()/2.;
+    }
+
+    public boolean isOutOfScreen(World world) {
+        int max = Math.max(this.width, this.height); // Max distance allowed for a bullet to be out of canvas
+        return this.x < -max || this.x > world.getWidth() + max || this.y < -max || this.y > world.getHeight() + max;
     }
 }

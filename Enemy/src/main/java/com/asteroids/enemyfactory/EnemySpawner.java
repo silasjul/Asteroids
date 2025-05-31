@@ -12,7 +12,7 @@ public class EnemySpawner extends Spawner implements ISpawner {
 
     @Override
     public void spawn(World world) {
-        if (!(this.getLastSpawnSeconds() >= spawnRate && world.getEntities(EntityType.ENEMY).size() <= this.maxInstances)) return;
+        if (!(this.getLastSpawnSeconds() >= spawnRate && world.getEntities(EntityType.ENEMY).size() < this.maxInstances)) return;
 
         double[] spawnPos = getSpawnPos(world);
         spawnEnemy(EnemyType.MELEE, spawnPos[0], spawnPos[1], world);

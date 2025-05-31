@@ -38,6 +38,7 @@ public class Sprite {
         }
 
         this.amount = spriteSheet.getWidth() / width;
+        createSubImages();
     }
 
     public Sprite(String imagePath, int width, int height, double scale) {
@@ -52,28 +53,28 @@ public class Sprite {
         for (int i = 0; i < amount; i++) {
             BufferedImage newImage = spriteSheet.getSubimage(i*width, 0, width, height);
 
-            if (rotationRad != 0) {
+            if (this.rotationRad != 0) {
                 newImage = scaleImage(newImage, this.scale);
-                newImage = rotateImage(newImage, rotationRad);
+                newImage = rotateImage(newImage, this.rotationRad);
             }
 
-            sprites[i] = newImage;
+            this.sprites[i] = newImage;
 
-            fxSprites[i] = SwingFXUtils.toFXImage(newImage, null); // Converts BufferedImage to a JavaFX Image
+            this.fxSprites[i] = SwingFXUtils.toFXImage(newImage, null); // Converts BufferedImage to a JavaFX Image
         }
     }
 
     public Image getSubImage(int i, double rotationRad) {
-        BufferedImage newImage = spriteSheet.getSubimage(i*width, 0, width, height);
+        BufferedImage newImage = spriteSheet.getSubimage(i*this.width, 0, this.width, this.height);
         newImage = scaleImage(newImage, this.scale);
         newImage = rotateImage(newImage, rotationRad);
         return SwingFXUtils.toFXImage(newImage, null);
     }
 
     public Image getImage(int i) {
-        return fxSprites[i];
+        return this.fxSprites[i];
     }
-    public Image getCurrentImage() {return getImage(current);}
+    public Image getCurrentImage() {return getImage(this.current);}
 
     public BufferedImage scaleImage(BufferedImage img, double scale) {
         int w = (int) (img.getWidth()*scale);

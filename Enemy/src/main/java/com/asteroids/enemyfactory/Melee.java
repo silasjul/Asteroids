@@ -61,7 +61,7 @@ public class Melee extends Character
         if (isDeathAnimationFinished) return;
         gc.drawImage(this.getImg(), x-this.width/2.*scale, y-this.height/2.*scale, this.width*scale, this.height*scale);
 
-        if (gameData.isTesting()) drawCenterCollider(gc);
+        drawCollider(gc, gameData);
     }
 
     private Image getImg() {
