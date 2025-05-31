@@ -1,12 +1,9 @@
 package com.asteroids.player;
 
-import com.asteroids.bullet.Bullet;
-import com.asteroids.bullet.BulletType;
+import com.asteroids.common.gameObjects.*;
 import com.asteroids.common.data.GameData;
 import com.asteroids.common.data.World;
 import com.asteroids.common.gameObjects.Character;
-import com.asteroids.common.gameObjects.EntityType;
-import com.asteroids.common.gameObjects.IPlayer;
 import com.asteroids.common.sprites.Sprite;
 import com.asteroids.player.engine.Engine;
 import com.asteroids.player.engine.EngineManager;
@@ -50,10 +47,22 @@ public class Player extends Character implements IPlayer {
         this.angle = calcAngle(gameData.getMousePosX(), gameData.getMousePosY());
         move(gameData, world);
 
-        // Bullet logic
+        // Firing logic
         if (gameData.getMousePressed() && isLoaded()) {
             fire(world, gameData);
         }
+
+        // Enemy bullet collision
+        for (Entity bullet : world.getEntities(EntityType.ENEMYBULLET)) {
+            if (world.isColliding(this, bullet)) {
+                onHit(bullet, world);
+            }
+        }
+    }
+
+    private void onHit(Entity bullet, World world) {
+        world.removeGameObject((IGameObject) bullet);
+        takeDmg(((IBullet) (bullet)).getDamage());
     }
 
     @Override
@@ -93,8 +102,10 @@ public class Player extends Character implements IPlayer {
 
     @Override
     protected void fire(World world, GameData gameData) {
-        Bullet bullet = new Bullet(this.x, this.y, this.bulletSpeed, this.angle, BulletType.BULLET, EntityType.PLAYERBULLET, this.scale);
-        world.addGameObject(bullet);
+        IWeapon weapon = world.getWeapon();
+        if (weapon == null) return;
+
+        weapon.fire(world, this.x, this.y, this.bulletSpeed, this.angle, this.dmg, BulletType.BULLET, EntityType.PLAYERBULLET, 2);
         lastFire = System.currentTimeMillis();
     }
 

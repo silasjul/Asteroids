@@ -25,7 +25,7 @@ public class AsteroidSpawner extends Spawner implements ISpawner {
 
         double scale = getRandomScale();
         int size = (int) (96 * scale);
-        Asteroid asteroid = new Asteroid(spawnPos[0], spawnPos[1], angleRadians, size, getRandomSpeed(), scale);
+        Asteroid asteroid = new Asteroid(spawnPos[0], spawnPos[1], angleRadians, size, getRandomSpeed(), scale, world.getPlayer());
         world.addGameObject(asteroid);
 
         this.setSpawnTime();

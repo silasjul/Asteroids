@@ -12,9 +12,4 @@ public class PlayerPlugin implements IPluginService {
         world.addGameObject(player);
         world.setPlayer(player);
     }
-
-    @Override
-    public void stop(World world) {
-
-    }
 }

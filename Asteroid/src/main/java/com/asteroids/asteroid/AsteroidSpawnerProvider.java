@@ -9,9 +9,4 @@ public class AsteroidSpawnerProvider implements IPluginService {
         System.out.println("Starting AsteroidSpawner");
         world.addSpawner(new AsteroidSpawner());
     }
-
-    @Override
-    public void stop(World world) {
-
-    }
 }

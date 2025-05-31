@@ -1,9 +1,6 @@
 package com.asteroids.common.data;
 
-import com.asteroids.common.gameObjects.Entity;
-import com.asteroids.common.gameObjects.EntityType;
-import com.asteroids.common.gameObjects.IGameObject;
-import com.asteroids.common.gameObjects.IPlayer;
+import com.asteroids.common.gameObjects.*;
 import com.asteroids.common.spawner.ISpawner;
 
 import java.util.ArrayList;
@@ -18,6 +15,7 @@ public class World {
     private final List<IGameObject> gameObjectsToRemove = new ArrayList<>();
     private final List<ISpawner> spawners = new ArrayList<>();
     private IPlayer player;
+    private IWeapon weapon;
 
     public World(double width, double height) {
         this.width = width;
@@ -103,5 +101,13 @@ public class World {
 
     public void setPlayer(IPlayer player) {
         this.player = player;
+    }
+
+    public IWeapon getWeapon() {
+        return this.weapon;
+    }
+
+    public void setWeapon(IWeapon weapon) {
+        this.weapon = weapon;
     }
 }

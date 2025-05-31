@@ -11,9 +11,4 @@ public class BackgroundPlugin implements IPluginService {
         Background bg = new Background((int) world.getWidth(), (int) world.getHeight());
         world.addGameObject(bg);
     }
-
-    @Override
-    public void stop(World world) {
-
-    }
 }

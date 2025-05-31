@@ -22,8 +22,9 @@ public class Asteroid extends Entity implements IGameObject {
     private boolean hasEnteredScreen = false;
     private boolean isDestroyed = false;
     private final int minSize = 120;
+    private IPlayer player;
 
-    public Asteroid(double x, double y, double angleRadians, int size, double speed, double scale) {
+    public Asteroid(double x, double y, double angleRadians, int size, double speed, double scale, IPlayer player) {
         super(x, y, size, size, size/2, size/2, EntityType.ASTEROID);
         this.angleRadians = angleRadians;
         this.size = size;
@@ -32,6 +33,7 @@ public class Asteroid extends Entity implements IGameObject {
         this.rotation = angleRadians;
         this.spriteAsteroid = new Sprite("/asteroid/base.png", 96, 96, this.scale);
         this.spriteFlame = new Sprite("/asteroid/asteroidFlame.png", 96, 96, this.scale, this.angleRadians + Math.PI);
+        this.player = player;
     }
 
     @Override
@@ -51,10 +53,11 @@ public class Asteroid extends Entity implements IGameObject {
             if (world.isColliding(this, entity))
                 onHit(this, entity, world);
         }
-        IPlayer player = world.getPlayer();
-        if (player.isAlive() && world.isColliding(this, (Entity) player)) {
-            world.removeGameObject(this);
+
+        if (player != null && player.isAlive() && world.isColliding(this, (Entity) player)) {
             player.takeDmg(this.size/2);
+            this.triggerDeathAnimation();
+            return;
         }
 
         // Entered Screen
@@ -76,7 +79,7 @@ public class Asteroid extends Entity implements IGameObject {
     @Override
     public void draw(GameData gameData, GraphicsContext gc, World world) {
         if (isDestroyed) {
-            if (spriteDestroyedAnimation.getAnimationCount() > 0 || this.size > minSize) {
+            if (spriteDestroyedAnimation.getAnimationCount() > 0) {
                 world.removeGameObject(this);
                 return;
             }
@@ -103,15 +106,21 @@ public class Asteroid extends Entity implements IGameObject {
         world.removeGameObject((IGameObject) bullet);
         if (hitAsteroid.size >= minSize) {
             split(world);
+            world.removeGameObject(hitAsteroid);
+        } else {
+            triggerDeathAnimation();
         }
+    }
+
+    private void triggerDeathAnimation() {
         this.isDestroyed = true;
         this.spriteDestroyedAnimation = new Sprite("/asteroid/explosion.png", 96, 96, this.scale, this.rotation);
     }
 
     private void split(World world) {
         // Spawn 2 new asteroids in half size
-        Asteroid child1 = new Asteroid(this.x, this.y, this.angleRadians + Math.PI/8, (int) (this.size/1.5), this.speed, this.scale);
-        Asteroid child2 = new Asteroid(this.x, this.y, this.angleRadians - Math.PI/8, (int) (this.size/1.5), this.speed, this.scale);
+        Asteroid child1 = new Asteroid(this.x, this.y, this.angleRadians + Math.PI/8, (int) (this.size/2), this.speed, this.scale, this.player);
+        Asteroid child2 = new Asteroid(this.x, this.y, this.angleRadians - Math.PI/8, (int) (this.size/2), this.speed, this.scale, this.player);
 
         world.addGameObject(child1);
         world.addGameObject(child2);

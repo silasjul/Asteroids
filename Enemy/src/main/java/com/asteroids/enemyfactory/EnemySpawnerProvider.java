@@ -9,9 +9,4 @@ public class EnemySpawnerProvider implements IPluginService {
         System.out.println("Starting EnemySpawner");
         world.addSpawner(new EnemySpawner());
     }
-
-    @Override
-    public void stop(World world) {
-
-    }
 }
