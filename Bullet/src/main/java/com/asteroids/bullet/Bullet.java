@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 public class Bullet extends Entity implements IGameObject {
     double speed;
     double angleRad;
+    double imgAngleRad;
     Sprite sprite;
     private final int z = 0;
 
@@ -19,13 +20,13 @@ public class Bullet extends Entity implements IGameObject {
         super(x, y, 32,32, 20, 20, entityType);
         this.speed = speed;
         this.angleRad = angleRad;
+        this.imgAngleRad = angleRad + Math.PI/2;
 
         // Different bullets
-        double imgRotation = angleRad + Math.PI/2;
         switch (type) {
-            case ZAP -> this.sprite = new Sprite ("/player/projectiles/zap.png", width, height, scale, imgRotation);
-            case BULLET -> this.sprite = new Sprite ("/player/projectiles/bullet.png", width, height, scale, imgRotation);
-            case BALL -> this.sprite = new Sprite ("/player/projectiles/ball.png", width, height, scale, imgRotation);
+            case ZAP -> this.sprite = new Sprite ("/player/projectiles/zap.png", width, height, scale, imgAngleRad);
+            case BULLET -> this.sprite = new Sprite ("/player/projectiles/bullet.png", width, height, scale, imgAngleRad);
+            case BALL -> this.sprite = new Sprite ("/player/projectiles/ball.png", width, height, scale, imgAngleRad);
         }
     }
 
@@ -40,7 +41,7 @@ public class Bullet extends Entity implements IGameObject {
 
     @Override
     public void draw(GameData gameData, GraphicsContext gc, World world) {
-        Image img = sprite.getSubImages(sprite.getCurrent());
+        Image img = sprite.getSubImage(sprite.getCurrent(), this.imgAngleRad);
         gc.drawImage(img, x - img.getWidth()/2, y - img.getHeight()/2);
         if (gameData.isAnimationFrame()) sprite.next();
 

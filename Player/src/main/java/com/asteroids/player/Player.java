@@ -23,24 +23,24 @@ public class Player extends Character implements IPlayer {
     private boolean isMoving = false;
     private final int z = 10;
 
-    HashMap<PlayerCondition, String> shipMap = new HashMap<>();
+    HashMap<PlayerCondition, Sprite> shipMap = new HashMap<>();
 
-    public Player(double screenWidth, double screenHeight) {
-        super(0,0, 48, 48, 40,40, EntityType.PLAYER, 2.5, 100,10, 2,5, 5);
+    public Player(double screenWidth, double screenHeight, double scale) {
+        super(0,0, 48, 48, 40,40, EntityType.PLAYER, scale, 100,10, 2,5, 5);
 
         // Spawn position
         this.x = screenHeight / 2. - this.width / 2.;
         this.y = screenWidth / 1.8;
 
         // Ships
-        shipMap.put(PlayerCondition.PERFECT, "/player/pl100.png");
-        shipMap.put(PlayerCondition.GOOD, "/player/pl75.png");
-        shipMap.put(PlayerCondition.DAMAGED, "/player/pl50.png");
-        shipMap.put(PlayerCondition.SHIT, "/player/pl25.png");
+        shipMap.put(PlayerCondition.PERFECT, new Sprite ("/player/pl100.png", this.width, this.height, this.scale));
+        shipMap.put(PlayerCondition.GOOD, new Sprite ("/player/pl75.png", this.width, this.height, this.scale));
+        shipMap.put(PlayerCondition.DAMAGED, new Sprite ("/player/pl50.png", this.width, this.height, this.scale));
+        shipMap.put(PlayerCondition.SHIT, new Sprite ("/player/pl25.png", this.width, this.height, this.scale));
 
         // Engine
         this.engineManager = new EngineManager();
-        this.engine = engineManager.getEngine(EngineType.CHARGED);
+        this.engine = engineManager.getEngine(EngineType.CHARGED, this.scale);
     }
 
     @Override
@@ -63,24 +63,24 @@ public class Player extends Character implements IPlayer {
         double rotation = this.getImageRotation();
 
         // draw engine flame
-        Sprite flame = isMoving ? engine.getPowering(this.scale, rotation) : engine.getIdle(this.scale, rotation);
+        Sprite flame = isMoving ? engine.getPowering(rotation) : engine.getIdle(rotation);
         int width = flame.getWidth();
         int height = flame.getHeight();
         double[] flamePos = getCenterImagePos(width, height);
-        Image flameImage = flame.getSubImages(engine.getCurrent(gameData));
+        Image flameImage = flame.getSubImage(engine.getCurrent(gameData), rotation);
         gc.drawImage(flameImage, flamePos[0], flamePos[1], width*this.scale, height*this.scale);
 
         // draw engine
-        Sprite base = engine.getBase(this.scale, rotation);
+        Sprite base = engine.getBase(rotation);
         width = base.getWidth();
         height = base.getHeight();
         double[] enginePos = getCenterImagePos(width, height);
-        Image engineImage = base.getSubImages(base.getCurrent());
+        Image engineImage = base.getSubImage(base.getCurrent(), rotation);
         gc.drawImage(engineImage, enginePos[0], enginePos[1], width*this.scale, height*this.scale);
 
         // draw ship
         double[] pos = getCenterImagePos(this.width, this.height);
-        gc.drawImage(getImg(), pos[0] , pos[1], this.width*scale, this.height*scale);
+        gc.drawImage(getPlayerImg(), pos[0] , pos[1], this.width*scale, this.height*scale);
 
         // draw collision in testing
         if (gameData.isTesting()) drawCenterCollider(gc);
@@ -98,16 +98,15 @@ public class Player extends Character implements IPlayer {
         lastFire = System.currentTimeMillis();
     }
 
-    @Override
-    public Image getImg() {
+    private Image getPlayerImg() {
         PlayerCondition c;
         if (hp >= 75) c = PlayerCondition.PERFECT;
         else if (hp >= 50) c = PlayerCondition.GOOD;
         else if (hp >= 25) c = PlayerCondition.DAMAGED;
         else c = PlayerCondition.SHIT;
 
-        Sprite sprite = new Sprite (this.shipMap.get(c), this.width, this.height, this.scale, getImageRotation());
-        return sprite.getSubImages(0);
+        Sprite sprite = this.shipMap.get(c);
+        return sprite.getSubImage(0, getImageRotation());
     }
 
     @Override

@@ -1,14 +1,14 @@
 package com.asteroids.core;
 
 import com.asteroids.common.data.GameData;
-import com.asteroids.common.data.IEnemyFactory;
 import com.asteroids.common.data.World;
 import com.asteroids.common.gameObjects.IGameObject;
+import com.asteroids.common.spawner.ISpawner;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 
-import static com.asteroids.core.ServiceLoaders.startServiceList;
+import static com.asteroids.core.ServiceLoaders.pluginServiceList;
 
 public class Game {
     private final Scene scene;
@@ -40,8 +40,8 @@ public class Game {
         scene.setOnMousePressed(_ -> gameData.setMousePressed(true));
         scene.setOnMouseReleased(_ -> gameData.setMousePressed(false));
 
-        // Start IStartService implementations
-        startServiceList().forEach(startService -> startService.start(world));
+        // Start IPluginService implementations
+        pluginServiceList().forEach(plugin -> plugin.start(world));
     }
 
     public void render() {
@@ -51,9 +51,10 @@ public class Game {
             gameObject.draw(gameData, gc, world);
         }
 
-        // Spawn new enemies
-        IEnemyFactory enemyFactory = world.getEnemyFactory();
-        if (enemyFactory != null) enemyFactory.spawn(world);
+        // Spawn new gameObjects with spawners (asteroids, enemies)
+        for (ISpawner spawner : world.getSpawners()) {
+            spawner.spawn(world);
+        }
 
         gameData.increaseFrame(); // used in animation
     }

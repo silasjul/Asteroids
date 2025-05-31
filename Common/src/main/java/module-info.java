@@ -6,4 +6,5 @@ module Common {
     exports com.asteroids.common.services;
     exports com.asteroids.common.sprites;
     exports com.asteroids.common.gameObjects;
+    exports com.asteroids.common.spawner;
 }

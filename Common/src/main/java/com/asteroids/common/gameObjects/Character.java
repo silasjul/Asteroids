@@ -27,8 +27,6 @@ public abstract class Character extends Entity implements IGameObject
         this.bulletSpeed = bulletSpeed;
     }
 
-    protected abstract Image getImg();
-
     protected abstract void move(GameData gameData, World world);
 
     protected abstract void fire(World world, GameData gameData);

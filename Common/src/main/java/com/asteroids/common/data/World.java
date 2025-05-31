@@ -4,6 +4,7 @@ import com.asteroids.common.gameObjects.Entity;
 import com.asteroids.common.gameObjects.EntityType;
 import com.asteroids.common.gameObjects.IGameObject;
 import com.asteroids.common.gameObjects.IPlayer;
+import com.asteroids.common.spawner.ISpawner;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,7 +16,7 @@ public class World {
     private final List<IGameObject> gameObjects = new ArrayList<>();
     private final List<IGameObject> gameObjectsToAdd = new ArrayList<>();
     private final List<IGameObject> gameObjectsToRemove = new ArrayList<>();
-    private IEnemyFactory enemyFactory;
+    private final List<ISpawner> spawners = new ArrayList<>();
     private IPlayer player;
 
     public World(double width, double height) {
@@ -29,6 +30,14 @@ public class World {
 
     public double getHeight() {
         return height;
+    }
+
+    public List<ISpawner> getSpawners() {
+        return spawners;
+    }
+
+    public void addSpawner(ISpawner spawner) {
+        spawners.add(spawner);
     }
 
     public List<IGameObject> getGameObjects() {
@@ -81,10 +90,6 @@ public class World {
         return e;
     }
 
-    public int getEnemiesAmount() {
-        return getEntities(EntityType.ENEMY).size();
-    }
-
     public boolean isColliding(Entity a, Entity b) {
         return a.getX() < b.getX() + b.getColliderWidth() &&
                 a.getX() + a.getColliderWidth() > b.getX() &&
@@ -98,13 +103,5 @@ public class World {
 
     public void setPlayer(IPlayer player) {
         this.player = player;
-    }
-
-    public IEnemyFactory getEnemyFactory() {
-        return this.enemyFactory;
-    }
-
-    public void setEnemyFactory(IEnemyFactory enemyFactory) {
-        this.enemyFactory = enemyFactory;
     }
 }

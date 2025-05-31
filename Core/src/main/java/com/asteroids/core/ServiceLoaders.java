@@ -9,7 +9,7 @@ import java.util.ServiceLoader;
 import static java.util.stream.Collectors.toList;
 
 public class ServiceLoaders {
-    public static List<IPluginService> startServiceList() {
+    public static List<IPluginService> pluginServiceList() {
         return ServiceLoader.load(IPluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 

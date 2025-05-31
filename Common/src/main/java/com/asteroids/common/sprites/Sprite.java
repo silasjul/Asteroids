@@ -32,7 +32,7 @@ public class Sprite {
         this.rotationRad = rotationRad;
 
         try {
-            spriteSheet = ImageIO.read(this.getClass().getResourceAsStream(imagePath));
+            spriteSheet = ImageIO.read(this.getClass().getResourceAsStream(imagePath)); // This tanks performance ://
         } catch (IOException e) {
             throw new RuntimeException("image is null");
         }
@@ -63,7 +63,7 @@ public class Sprite {
         }
     }
 
-    public Image getSubImages(int i) {
+    public Image getSubImage(int i, double rotationRad) {
         BufferedImage newImage = spriteSheet.getSubimage(i*width, 0, width, height);
         newImage = scaleImage(newImage, this.scale);
         newImage = rotateImage(newImage, rotationRad);

@@ -16,7 +16,8 @@
         <module>Player</module>
         <module>Background</module>
         <module>Bullet</module>
-        <module>EnemyFactory</module>
+        <module>Enemy</module>
+        <module>Asteroid</module>
     </modules>
     <properties>
         <java>java</java>

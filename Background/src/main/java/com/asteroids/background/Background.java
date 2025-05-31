@@ -53,7 +53,7 @@ public class Background implements IGameObject {
             }
 
             Image img = parallax.getCurrentImage();
-            // Draw the background twice - one regular and one offset
+            // Draw each background layer twice - one regular and one offset
             gc.drawImage(img, 0, parallax.getOffsetY(), world.getWidth(), world.getHeight());
             gc.drawImage(img, 0, parallax.getOffsetY() - world.getHeight(), world.getWidth(), world.getHeight());
         }

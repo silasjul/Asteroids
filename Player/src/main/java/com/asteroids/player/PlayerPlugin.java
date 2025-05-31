@@ -8,7 +8,7 @@ public class PlayerPlugin implements IPluginService {
     @Override
     public void start(World world) {
         System.out.println("Starting Player");
-        Player player = new Player(world.getWidth(), world.getHeight());
+        Player player = new Player(world.getWidth(), world.getHeight(), 2.5);
         world.addGameObject(player);
         world.setPlayer(player);
     }
