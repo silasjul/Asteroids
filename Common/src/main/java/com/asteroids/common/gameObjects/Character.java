@@ -38,12 +38,12 @@ public abstract class Character extends Entity implements IGameObject
 
     public boolean isLoaded() {return System.currentTimeMillis() - lastFire > getFireDelay();}
 
-    public void takeDmg(int dmg) {
+    public void takeDmg(int dmg, World world) {
         this.hp -= dmg;
-        if (hp <= 0) die();
+        if (hp <= 0) onDeath(world);
     }
 
-    public abstract void die();
+    public abstract void onDeath(World world);
 
     public double getCenterX() {
         return this.x;}

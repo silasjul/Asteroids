@@ -3,15 +3,20 @@ package com.asteroids.core;
 import com.asteroids.common.data.GameData;
 import com.asteroids.common.data.World;
 import com.asteroids.common.gameObjects.IGameObject;
+import com.asteroids.common.scoringClient.ScoringClient;
 import com.asteroids.common.services.IPluginService;
 import com.asteroids.common.spawner.ISpawner;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -21,14 +26,16 @@ public class Game {
     private final int width = 1280;
     private final int height = 720;
 
-    private final GameData gameData = new GameData(false);
-    private final World world = new World(width, height);
-
     private final Canvas canvas = new Canvas(width, height);
     private final GraphicsContext gc = canvas.getGraphicsContext2D();
     private final StackPane root = new StackPane(canvas);
     private final Scene scene = new Scene(root, width, height);
     private final Timeline tl = new Timeline();
+    private final Label scoreLabel = new Label("Score: 0");;
+
+    private final GameData gameData = new GameData(false);
+    private final ScoringClient scoringClient = new ScoringClient(scoreLabel);
+    private final World world = new World(width, height, scoringClient);
 
     private final List<IPluginService> pluginServiceList;
 
@@ -55,6 +62,16 @@ public class Game {
         scene.setCursor(Cursor.CROSSHAIR);
         stage.setScene(scene);
         stage.setResizable(false);
+
+        // Add label to StackPane
+        scoreLabel.setFont(new Font("Arial", 24));
+        scoreLabel.setTextFill(Color.WHITE);
+
+        StackPane.setAlignment(scoreLabel, Pos.TOP_LEFT);
+        scoreLabel.setTranslateX(10); // Add padding
+        scoreLabel.setTranslateY(10);
+
+        root.getChildren().add(scoreLabel);
     }
 
     private void configureTimeline() {

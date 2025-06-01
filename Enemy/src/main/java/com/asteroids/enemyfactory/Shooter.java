@@ -37,7 +37,8 @@ public class Shooter extends Enemy {
     }
 
     @Override
-    public void die() {
+    public void onDeath(World world) {
+        world.addScore(5);
         this.isDead = true;
     }
 

@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 
 class WorldTest {
 
-    private World world = new World(1000, 1000);
+    private World world = new World(1000, 1000, null);
 
     // Create and return a mocked Entity
     private Entity mockEntity(double x, double y, double width, double height) {

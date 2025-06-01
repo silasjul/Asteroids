@@ -55,7 +55,7 @@ public class Asteroid extends Entity implements IGameObject {
         }
 
         if (player != null && player.isAlive() && world.isColliding(this, (Entity) player)) {
-            player.takeDmg(this.size/2);
+            player.takeDmg(this.size/2, world);
             this.triggerDeathAnimation();
             return;
         }
@@ -105,6 +105,7 @@ public class Asteroid extends Entity implements IGameObject {
     private void onHit(Asteroid hitAsteroid, Entity bullet, World world) {
         world.removeGameObject((IGameObject) bullet);
         if (hitAsteroid.size >= minSize) {
+            world.addScore(1);
             split(world);
             world.removeGameObject(hitAsteroid);
         } else {

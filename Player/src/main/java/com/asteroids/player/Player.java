@@ -62,7 +62,7 @@ public class Player extends Character implements IPlayer {
 
     private void onHit(Entity bullet, World world) {
         world.removeGameObject((IGameObject) bullet);
-        takeDmg(((IBullet) (bullet)).getDamage());
+        takeDmg(((IBullet) (bullet)).getDamage(), world);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class Player extends Character implements IPlayer {
     }
 
     @Override
-    public void die() {
+    public void onDeath(World world) {
         isDead = true;
     }
 

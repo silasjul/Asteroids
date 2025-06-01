@@ -69,12 +69,13 @@ public class Melee extends Enemy {
 
     @Override
     protected void fire(World world, GameData gameData) {
-        player.takeDmg(this.dmg);
+        player.takeDmg(this.dmg, world);
         lastFire = System.currentTimeMillis();
     }
 
     @Override
-    public void die() {
+    public void onDeath(World world) {
+        world.addScore(5);
         this.isDead = true;
     }
 

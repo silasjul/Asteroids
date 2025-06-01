@@ -41,7 +41,7 @@ public abstract class Enemy extends Character {
         for (Entity bullet : world.getEntities(EntityType.PLAYERBULLET)) {
             if (world.isColliding(this, bullet)) {
                 world.removeGameObject((IGameObject) bullet);
-                this.takeDmg(((IBullet) (bullet)).getDamage());
+                this.takeDmg(((IBullet) (bullet)).getDamage(), world);
             }
         }
     }

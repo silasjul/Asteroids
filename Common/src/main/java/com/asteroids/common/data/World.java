@@ -1,6 +1,7 @@
 package com.asteroids.common.data;
 
 import com.asteroids.common.gameObjects.*;
+import com.asteroids.common.scoringClient.ScoringClient;
 import com.asteroids.common.spawner.ISpawner;
 
 import java.util.ArrayList;
@@ -14,12 +15,14 @@ public class World {
     private final List<IGameObject> gameObjectsToAdd = new ArrayList<>();
     private final List<IGameObject> gameObjectsToRemove = new ArrayList<>();
     private final List<ISpawner> spawners = new ArrayList<>();
+    private final ScoringClient scoringClient;
     private IPlayer player;
     private IWeapon weapon;
 
-    public World(double width, double height) {
+    public World(double width, double height, ScoringClient scoringClient) {
         this.width = width;
         this.height = height;
+        this.scoringClient = scoringClient;
     }
 
     public double getWidth() {
@@ -109,5 +112,9 @@ public class World {
 
     public void setWeapon(IWeapon weapon) {
         this.weapon = weapon;
+    }
+
+    public void addScore(int amount) {
+        scoringClient.addScore(amount);
     }
 }
