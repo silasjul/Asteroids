@@ -12,8 +12,4 @@ public class ServiceLoaders {
     public static List<IPluginService> pluginServiceList() {
         return ServiceLoader.load(IPluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
-
-    public static List<IGameObject> renderServiceList() {
-        return ServiceLoader.load(IGameObject.class).stream().map(ServiceLoader.Provider::get).collect(toList());
-    }
 }
