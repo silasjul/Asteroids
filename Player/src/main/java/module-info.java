@@ -1,9 +1,9 @@
 import com.asteroids.common.services.IPluginService;
-import com.asteroids.player.PlayerPlugin;
+import com.asteroids.common.services.IPostProcessingService;
 
 module Player {
     requires Common;
     requires javafx.graphics;
-    exports com.asteroids.player;
-    provides IPluginService with PlayerPlugin;
+    provides IPluginService with com.asteroids.player.PlayerPlugin;
+    provides IPostProcessingService with com.asteroids.PostProcess;
 }

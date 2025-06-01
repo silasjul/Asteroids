@@ -1,5 +1,6 @@
 package com.asteroids.core;
 
+import com.asteroids.common.services.IPostProcessingService;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -9,6 +10,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.lang.module.Configuration;
+import java.lang.module.ModuleFinder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Set;
+import java.util.ServiceLoader;
 
 public class Main extends Application {
     private final int width = 1280;

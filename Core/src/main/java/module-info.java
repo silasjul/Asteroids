@@ -6,5 +6,6 @@ module Core {
     requires javafx.graphics;
     uses IPluginService;
     uses IGameObject;
+    uses com.asteroids.common.services.IPostProcessingService;
     exports com.asteroids.core;
 }

@@ -3,12 +3,19 @@ package com.asteroids.core;
 import com.asteroids.common.data.GameData;
 import com.asteroids.common.data.World;
 import com.asteroids.common.gameObjects.IGameObject;
+import com.asteroids.common.services.IPostProcessingService;
 import com.asteroids.common.spawner.ISpawner;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.lang.module.ModuleFinder;
+import java.util.ServiceLoader;
+import java.nio.file.Paths;
+import java.util.Set;
+
 import static com.asteroids.core.ServiceLoaders.pluginServiceList;
+import static com.asteroids.core.ServiceLoaders.postProcessingServices;
 
 public class Game {
     private final Scene scene;
@@ -42,6 +49,8 @@ public class Game {
 
         // Start IPluginService implementations
         pluginServiceList().forEach(plugin -> plugin.start(world));
+
+        postProcessingServices().forEach(IPostProcessingService::postProcess);
     }
 
     public void render() {

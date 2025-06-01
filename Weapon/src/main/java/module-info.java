@@ -1,9 +1,9 @@
 import com.asteroids.common.services.IPluginService;
-import com.asteroids.bullet.WeaponProvider;
+import com.asteroids.common.services.IPostProcessingService;
 
 module Bullet {
     requires Common;
     requires javafx.graphics;
-    exports com.asteroids.bullet;
-    provides IPluginService with WeaponProvider;
+    provides IPluginService with com.asteroids.bullet.WeaponProvider;
+    provides IPostProcessingService with com.asteroids.PostProcess;
 }
