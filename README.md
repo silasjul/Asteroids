@@ -23,7 +23,7 @@ Asteroids is a component-based arcade-style game i developed using Java and Java
 </div>
 
 ## Requirements
-These were the requirements when designing and developing the game:
+These were the must-have requirements for the game, given by our teacher:
 1. The game must include Player, Enemy, Asteroids, Weapon/Bullet and Rendering/Drawing (Core) components.
 2. The Player, Enemy and Weapon components must implement service provided interfaces that allow the components to be updated and removed without recompilation.
 
