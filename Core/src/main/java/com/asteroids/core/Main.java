@@ -10,6 +10,11 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ModuleConfig.class);
+
+        for (String beanName : ctx.getBeanDefinitionNames()) {
+            System.out.println(beanName);
+        }
+
         Game game = ctx.getBean(Game.class);
         game.onStart(stage);
     }
