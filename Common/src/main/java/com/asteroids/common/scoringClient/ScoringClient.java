@@ -27,7 +27,7 @@ public class ScoringClient {
             // Send request
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            // Return response
+            // Handle Response
             scoreLabel.setText("Score: " + response.body());
             return;
         } catch (Exception e) {
